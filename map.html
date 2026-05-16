@@ -22,6 +22,12 @@
                     <li><a href="contact.html">Kontakt</a></li>
                 </ul>
             </nav>
+            <div class="a11y-controls" aria-label="Accessibility settings">
+                <button class="a11y-btn" type="button" id="contrast-toggle" aria-pressed="false" aria-label="Toggle high contrast mode">Kontrast</button>
+                <button class="a11y-btn" type="button" id="text-decrease" aria-label="Decrease text size">A-</button>
+                <button class="a11y-btn" type="button" id="text-reset" aria-label="Reset text size">A</button>
+                <button class="a11y-btn" type="button" id="text-increase" aria-label="Increase text size">A+</button>
+            </div>
         </div>
     </header>
 
@@ -34,7 +40,7 @@
                 <div class="search-box">
                     <label for="city-search">Wyszukaj miasto:</label>
                     <input type="text" id="city-search" placeholder="np. Warszawa, Wrocław...">
-                    <button class="btn-small">Szukaj</button>
+                    <button class="btn-small" type="button" id="city-search-btn">Szukaj</button>
                 </div>
 
                 <div class="map-container">

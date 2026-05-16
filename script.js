@@ -1,82 +1,143 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const searchBtn = document.querySelector('.btn-small');
+function clampNumber(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+}
+
+function applyTheme(theme) {
+    if (theme === 'contrast') {
+        document.documentElement.dataset.theme = 'contrast';
+    } else {
+        delete document.documentElement.dataset.theme;
+    }
+
+    const toggle = document.getElementById('contrast-toggle');
+    if (toggle) {
+        toggle.setAttribute('aria-pressed', theme === 'contrast' ? 'true' : 'false');
+    }
+}
+
+function applyFontScale(scale) {
+    const normalized = clampNumber(scale, 1, 1.6);
+    document.documentElement.style.setProperty('--font-scale', String(normalized));
+    localStorage.setItem('pf-font-scale', String(normalized));
+}
+
+function initAccessibilityControls() {
+    const contrastToggle = document.getElementById('contrast-toggle');
+    const decBtn = document.getElementById('text-decrease');
+    const resetBtn = document.getElementById('text-reset');
+    const incBtn = document.getElementById('text-increase');
+
+    if (!contrastToggle && !decBtn && !resetBtn && !incBtn) return;
+
+    const savedTheme = localStorage.getItem('pf-theme') || 'default';
+    applyTheme(savedTheme);
+
+    const savedScale = Number.parseFloat(localStorage.getItem('pf-font-scale') || '1');
+    applyFontScale(Number.isFinite(savedScale) ? savedScale : 1);
+
+    if (contrastToggle) {
+        contrastToggle.addEventListener('click', () => {
+            const current = document.documentElement.dataset.theme === 'contrast' ? 'contrast' : 'default';
+            const next = current === 'contrast' ? 'default' : 'contrast';
+            localStorage.setItem('pf-theme', next);
+            applyTheme(next);
+        });
+    }
+
+    const step = 0.1;
+
+    if (decBtn) {
+        decBtn.addEventListener('click', () => {
+            const current = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-scale')) || 1;
+            applyFontScale(current - step);
+        });
+    }
+
+    if (incBtn) {
+        incBtn.addEventListener('click', () => {
+            const current = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-scale')) || 1;
+            applyFontScale(current + step);
+        });
+    }
+
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            applyFontScale(1);
+        });
+    }
+}
+
+function initMapSearch() {
+    const searchBtn = document.getElementById('city-search-btn');
     const cityInput = document.getElementById('city-search');
-    const shelters = document.querySelectorAll('.shelter-item');
+    const shelters = Array.from(document.querySelectorAll('.shelter-item'));
+
+    if (!searchBtn || !cityInput || shelters.length === 0) return;
 
     searchBtn.addEventListener('click', () => {
         const searchText = cityInput.value.toLowerCase().trim();
 
         if (searchText === "") {
-            alert("Proszę wpisać nazwę miasta.");
+            alert("ProszД™ wpisaД‡ nazwД™ miasta.");
             return;
         }
 
-        let found = false;
+        let firstMatch = null;
 
-        shelters.forEach(shelter => {
+        shelters.forEach((shelter) => {
             const shelterCity = shelter.textContent.toLowerCase();
-            
-            if (shelterCity.includes(searchText)) {
-               
-                shelter.style.border = "2px solid #e67e22";
-                shelter.style.backgroundColor = "#fff3e0";
-                found = true;
-                
-              
-                shelter.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                
-                shelter.style.border = "none";
-                shelter.style.borderLeft = "4px solid #e67e22";
-                shelter.style.backgroundColor = "#f4f7f6";
-            }
+            const matched = shelterCity.includes(searchText);
+
+            shelter.classList.toggle('search-match', matched);
+            if (matched && !firstMatch) firstMatch = shelter;
         });
 
-        if (!found) {
-            alert("Niestety, nie znaleźliśmy schroniska w tym mieście.");
+        if (firstMatch) {
+            firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+            alert("Niestety, nie znaleЕєliЕ›my schroniska w tym mieЕ›cie.");
         }
     });
-});
+}
 
-document.addEventListener('DOMContentLoaded', () => {
+function initShelterMap() {
     const mapFrame = document.getElementById('main-map');
-    const shelters = document.querySelectorAll('.shelter-item');
+    const shelters = Array.from(document.querySelectorAll('.shelter-item'));
 
-    shelters.forEach(shelter => {
+    if (!mapFrame || shelters.length === 0) return;
+
+    shelters.forEach((shelter) => {
         shelter.addEventListener('click', () => {
-           
             const address = shelter.getAttribute('data-address');
-            
-           
+            if (!address) return;
+
             const newMapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-            
-            
             mapFrame.src = newMapUrl;
 
-            
-            shelters.forEach(s => s.classList.remove('active-shelter'));
+            shelters.forEach((s) => s.classList.remove('active-shelter'));
             shelter.classList.add('active-shelter');
 
-           
             mapFrame.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
     });
-});
+}
 
+function initContactForm() {
+    const contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
 
-const contactForm = document.getElementById('contact-form');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         let isValid = true;
         const fields = ['name', 'email', 'message'];
 
-        fields.forEach(fieldId => {
+        fields.forEach((fieldId) => {
             const field = document.getElementById(fieldId);
+            if (!field) return;
+
             const parent = field.parentElement;
-            
+
             if (!field.value.trim() || (fieldId === 'email' && !field.value.includes('@'))) {
                 parent.classList.add('invalid');
                 isValid = false;
@@ -86,9 +147,16 @@ if (contactForm) {
         });
 
         if (isValid) {
-            document.getElementById('form-success').style.display = 'block';
+            const success = document.getElementById('form-success');
+            if (success) success.style.display = 'block';
             contactForm.reset();
-            
         }
     });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    initAccessibilityControls();
+    initMapSearch();
+    initShelterMap();
+    initContactForm();
+});

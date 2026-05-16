@@ -4,6 +4,13 @@
     --text-color: #333;
     --bg-light: #f4f7f6;
     --white: #ffffff;
+    --header-fg: var(--white);
+    --font-scale: 1;
+    --highlight-bg: #fff3e0;
+}
+
+html {
+    font-size: calc(100% * var(--font-scale));
 }
 
 body {
@@ -12,6 +19,21 @@ body {
     margin: 0;
     color: var(--text-color);
     background-color: var(--bg-light);
+}
+
+/* High contrast theme */
+html[data-theme="contrast"] {
+    --primary-color: #000000;
+    --accent-color: #ffd800;
+    --text-color: #ffd800;
+    --bg-light: #000000;
+    --white: #000000;
+    --header-fg: #ffd800;
+    --highlight-bg: #000000;
+}
+
+html[data-theme="contrast"] * {
+    box-shadow: none !important;
 }
 
 .container {
@@ -38,7 +60,7 @@ body {
 
 header {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--header-fg);
     padding: 1rem 0;
 }
 
@@ -46,6 +68,8 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .logo {
@@ -65,7 +89,7 @@ nav ul {
 }
 
 nav a {
-    color: var(--white);
+    color: var(--header-fg);
     text-decoration: none;
     font-weight: 500;
 }
@@ -73,6 +97,46 @@ nav a {
 nav a:hover, nav a[aria-current="page"] {
     color: var(--accent-color);
     border-bottom: 2px solid var(--accent-color);
+}
+
+.a11y-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.a11y-btn {
+    appearance: none;
+    background: transparent;
+    color: var(--header-fg);
+    border: 2px solid var(--header-fg);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font: inherit;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.a11y-btn:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.a11y-btn:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+@media (max-width: 800px) {
+    header .container {
+        justify-content: center;
+    }
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-left: 0;
+    }
 }
 
 .hero {
@@ -119,6 +183,24 @@ nav a:hover, nav a[aria-current="page"] {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
+html[data-theme="contrast"] .mission-item,
+html[data-theme="contrast"] .pet-card,
+html[data-theme="contrast"] .video-item,
+html[data-theme="contrast"] .shelter-item,
+html[data-theme="contrast"] .info-box,
+html[data-theme="contrast"] .map-container {
+    border: 2px solid var(--accent-color);
+}
+
+html[data-theme="contrast"] a {
+    color: var(--accent-color);
+}
+
+html[data-theme="contrast"] .btn,
+html[data-theme="contrast"] .btn-small {
+    color: #000;
+}
+
 footer {
     background: var(--primary-color);
     color: var(--white);
@@ -136,6 +218,7 @@ footer {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .search-box input {
@@ -143,6 +226,7 @@ footer {
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 300px;
+    max-width: 100%;
 }
 
 .btn-small {
@@ -214,7 +298,12 @@ footer {
 
 .active-shelter {
     border: 2px solid var(--accent-color) !important;
-    background-color: #fff3e0 !important;
+    background-color: var(--highlight-bg) !important;
+}
+
+.shelter-item.search-match {
+    border: 2px solid var(--accent-color) !important;
+    background-color: var(--highlight-bg) !important;
 }
 
 .shelter-item h3 {
