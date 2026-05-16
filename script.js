@@ -95,7 +95,7 @@ function initMapSearch() {
         if (firstMatch) {
             firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
-            alert("Niestety, nie znaleЕєliЕ›my schroniska w tym mieЕ›cie.");
+            alert("Niestety, nie znalezmy schroniska w tym miescie.");
         }
     });
 }
