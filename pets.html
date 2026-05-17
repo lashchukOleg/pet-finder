@@ -8,18 +8,31 @@
 </head>
 <body>
 
-    <a href="#main-content" class="skip-link">Przejdź do treści głównej</a>
+    <a href="#main-content" class="skip-link">PrzejdЕє do treЕ›ci gЕ‚Гіwnej</a>
 
-    <header>
+    <header class="site-header">
         <div class="container">
             <div class="logo">Pet<span>Finder</span></div>
-            <nav aria-label="Menu główne">
-                <ul>
+            <button class="nav-toggle" type="button" aria-controls="site-menu" aria-expanded="false">
+                <span class="sr-only">Toggle menu</span>
+                <span class="bars" aria-hidden="true">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </span>
+            </button>
+            <nav class="main-nav" aria-label="Menu gЕ‚Гіwne">
+                <ul id="site-menu" class="menu">
                     <li><a href="index.html">Start</a></li>
                     <li><a href="map.html">Mapa schronisk</a></li>
                     <li><a href="pets.html" aria-current="page">Podopieczni</a></li>
-                    <li><a href="video.html">Wideo</a></li>
-                    <li><a href="contact.html">Kontakt</a></li>
+                    <li class="dropdown">
+                        <button class="dropdown-toggle" type="button" aria-expanded="false" aria-controls="submenu-more">Wiecej</button>
+                        <ul class="submenu" id="submenu-more">
+                            <li><a href="video.html">Wideo</a></li>
+                            <li><a href="contact.html">Kontakt</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
             <div class="a11y-controls" aria-label="Accessibility settings">
@@ -35,7 +48,7 @@
         <section class="pets-hero">
             <div class="container">
                 <h1>Nasi Podopieczni</h1>
-                <p>Poznaj zwierzęta, które z niecierpliwością czekają na nowy, kochający dom.</p>
+                <p>Poznaj zwierzД™ta, ktГіre z niecierpliwoЕ›ciД… czekajД… na nowy, kochajД…cy dom.</p>
             </div>
         </section>
 
@@ -49,7 +62,7 @@
                         </div>
                         <div class="pet-content">
                             <h3>Burek</h3>
-                            <p>Wesoły i energiczny Beagle. Uwielbia długie spacery i zabawę z dziećmi. Jest zaszczepiony i gotowy do adopcji.</p>
+                            <p>WesoЕ‚y i energiczny Beagle. Uwielbia dЕ‚ugie spacery i zabawД™ z dzieД‡mi. Jest zaszczepiony i gotowy do adopcji.</p>
                             <div class="pet-footer">
                                 <span class="pet-tag">Pies</span>
                                 <a href="contact.html" class="btn-small">Adoptuj</a>
@@ -63,7 +76,7 @@
                         </div>
                         <div class="pet-content">
                             <h3>Mizia</h3>
-                            <p>Spokojna kotka, która kocha wylegiwanie się na słońcu. Szuka cichego domu bez innych zwierząt.</p>
+                            <p>Spokojna kotka, ktГіra kocha wylegiwanie siД™ na sЕ‚oЕ„cu. Szuka cichego domu bez innych zwierzД…t.</p>
                             <div class="pet-footer">
                                 <span class="pet-tag">Kot</span>
                                 <a href="contact.html" class="btn-small">Adoptuj</a>
@@ -73,11 +86,11 @@
 
                     <article class="pet-card">
                         <div class="pet-image">
-                            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80" alt="Złoty Labrador o imieniu Maks">
+                            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80" alt="ZЕ‚oty Labrador o imieniu Maks">
                         </div>
                         <div class="pet-content">
                             <h3>Maks</h3>
-                            <p>Młody Labrador o złotym sercu. Jest bardzo posłuszny i szybko uczy się nowych komend.</p>
+                            <p>MЕ‚ody Labrador o zЕ‚otym sercu. Jest bardzo posЕ‚uszny i szybko uczy siД™ nowych komend.</p>
                             <div class="pet-footer">
                                 <span class="pet-tag">Pies</span>
                                 <a href="contact.html" class="btn-small">Adoptuj</a>
@@ -91,7 +104,7 @@
                         </div>
                         <div class="pet-content">
                             <h3>Luna</h3>
-                            <p>Tajemnicza i elegancka czarna kotka. Bardzo inteligentna, uwielbia zabawy z wędką.</p>
+                            <p>Tajemnicza i elegancka czarna kotka. Bardzo inteligentna, uwielbia zabawy z wД™dkД….</p>
                             <div class="pet-footer">
                                 <span class="pet-tag">Kot</span>
                                 <a href="contact.html" class="btn-small">Adoptuj</a>
@@ -106,7 +119,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 PetFinder. Zgodność z WCAG 2.2.</p>
+            <p>&copy; 2024 PetFinder. ZgodnoЕ›Д‡ z WCAG 2.2.</p>
         </div>
     </footer>
 

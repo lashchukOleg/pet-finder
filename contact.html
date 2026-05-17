@@ -8,18 +8,31 @@
 </head>
 <body>
 
-    <a href="#main-content" class="skip-link">Przejdź do treści głównej</a>
+    <a href="#main-content" class="skip-link">PrzejdЕє do treЕ›ci gЕ‚Гіwnej</a>
 
-    <header>
+    <header class="site-header">
         <div class="container">
             <div class="logo">Pet<span>Finder</span></div>
-            <nav aria-label="Menu główne">
-                <ul>
+            <button class="nav-toggle" type="button" aria-controls="site-menu" aria-expanded="false">
+                <span class="sr-only">Toggle menu</span>
+                <span class="bars" aria-hidden="true">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </span>
+            </button>
+            <nav class="main-nav" aria-label="Menu gЕ‚Гіwne">
+                <ul id="site-menu" class="menu">
                     <li><a href="index.html">Start</a></li>
                     <li><a href="map.html">Mapa schronisk</a></li>
                     <li><a href="pets.html">Podopieczni</a></li>
-                    <li><a href="video.html">Wideo</a></li>
-                    <li><a href="contact.html" aria-current="page">Kontakt</a></li>
+                    <li class="dropdown">
+                        <button class="dropdown-toggle" type="button" aria-expanded="false" aria-controls="submenu-more">Wiecej</button>
+                        <ul class="submenu" id="submenu-more">
+                            <li><a href="video.html">Wideo</a></li>
+                            <li><a href="contact.html" aria-current="page">Kontakt</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
             <div class="a11y-controls" aria-label="Accessibility settings">
@@ -34,11 +47,11 @@
     <main id="main-content" class="container">
         <section class="contact-section">
             <div class="contact-info">
-                <h1>Skontaktuj się z nami</h1>
-                <p>Masz pytania dotyczące adopcji? A może chcesz zostać wolontariuszem? Napisz do nas!</p>
+                <h1>Skontaktuj siД™ z nami</h1>
+                <p>Masz pytania dotyczД…ce adopcji? A moЕјe chcesz zostaД‡ wolontariuszem? Napisz do nas!</p>
                 
                 <div class="info-box">
-                    <p><strong>Adres:</strong> ul. Zwierzęca 12, 00-001 Warszawa</p>
+                    <p><strong>Adres:</strong> ul. ZwierzД™ca 12, 00-001 Warszawa</p>
                     <p><strong>E-mail:</strong> kontakt@petfinder.pl</p>
                     <p><strong>Tel:</strong> +48 123 456 789</p>
                 </div>
@@ -47,7 +60,7 @@
             <div class="form-container">
                 <form id="contact-form" novalidate>
                     <div class="form-group">
-                        <label for="name">Imię i Nazwisko *</label>
+                        <label for="name">ImiД™ i Nazwisko *</label>
                         <input type="text" id="name" name="name" required aria-required="true">
                         <span class="error-msg" id="name-error">To pole jest wymagane</span>
                     </div>
@@ -55,26 +68,26 @@
                     <div class="form-group">
                         <label for="email">E-mail *</label>
                         <input type="email" id="email" name="email" required aria-required="true">
-                        <span class="error-msg" id="email-error">Wprowadź poprawny adres e-mail</span>
+                        <span class="error-msg" id="email-error">WprowadЕє poprawny adres e-mail</span>
                     </div>
 
                     <div class="form-group">
-                        <label for="subject">Temat wiadomości</label>
+                        <label for="subject">Temat wiadomoЕ›ci</label>
                         <select id="subject" name="subject">
-                            <option value="adopcja">Chcę adoptować zwierzę</option>
-                            <option value="wolontariat">Chcę zostać wolontariuszem</option>
+                            <option value="adopcja">ChcД™ adoptowaД‡ zwierzД™</option>
+                            <option value="wolontariat">ChcД™ zostaД‡ wolontariuszem</option>
                             <option value="inne">Inne zapytanie</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="message">Wiadomość *</label>
+                        <label for="message">WiadomoЕ›Д‡ *</label>
                         <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
-                        <span class="error-msg" id="message-error">Wpisz treść wiadomości</span>
+                        <span class="error-msg" id="message-error">Wpisz treЕ›Д‡ wiadomoЕ›ci</span>
                     </div>
 
-                    <button type="submit" class="btn">Wyślij zgłoszenie</button>
-                    <p id="form-success" class="success-msg" role="alert">Dziękujemy! Twoja wiadomość została wysłana.</p>
+                    <button type="submit" class="btn">WyЕ›lij zgЕ‚oszenie</button>
+                    <p id="form-success" class="success-msg" role="alert">DziД™kujemy! Twoja wiadomoЕ›Д‡ zostaЕ‚a wysЕ‚ana.</p>
                 </form>
             </div>
         </section>
@@ -82,7 +95,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 PetFinder. Zgodność z WCAG 2.2.</p>
+            <p>&copy; 2026 PetFinder. ZgodnoЕ›Д‡ z WCAG 2.2.</p>
         </div>
     </footer>
 

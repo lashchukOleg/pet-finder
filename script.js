@@ -154,9 +154,85 @@ function initContactForm() {
     });
 }
 
+function initResponsiveNavigation() {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+
+    const navToggle = header.querySelector('.nav-toggle');
+    const mainNav = header.querySelector('.main-nav');
+
+    if (!navToggle || !mainNav) return;
+
+    const mobileQuery = window.matchMedia('(max-width: 800px)');
+
+    function setNavOpen(isOpen) {
+        header.classList.toggle('nav-open', isOpen);
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+
+    function closeAllDropdowns() {
+        header.querySelectorAll('.dropdown.open').forEach((dropdown) => {
+            dropdown.classList.remove('open');
+            const btn = dropdown.querySelector('.dropdown-toggle');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    navToggle.addEventListener('click', () => {
+        const isOpen = !header.classList.contains('nav-open');
+        setNavOpen(isOpen);
+        if (!isOpen) closeAllDropdowns();
+    });
+
+    header.querySelectorAll('.dropdown-toggle').forEach((button) => {
+        const parent = button.closest('.dropdown');
+        if (!parent) return;
+
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const shouldOpen = !parent.classList.contains('open');
+            closeAllDropdowns();
+            parent.classList.toggle('open', shouldOpen);
+            button.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+        });
+    });
+
+    header.querySelectorAll('.main-nav a').forEach((link) => {
+        link.addEventListener('click', () => {
+            if (mobileQuery.matches) setNavOpen(false);
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!header.contains(event.target)) closeAllDropdowns();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        setNavOpen(false);
+        closeAllDropdowns();
+    });
+
+    function syncOnResize() {
+        if (!mobileQuery.matches) {
+            setNavOpen(false);
+        }
+    }
+
+    if (typeof mobileQuery.addEventListener === 'function') {
+        mobileQuery.addEventListener('change', syncOnResize);
+    } else if (typeof mobileQuery.addListener === 'function') {
+        mobileQuery.addListener(syncOnResize);
+    }
+
+    syncOnResize();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initAccessibilityControls();
     initMapSearch();
     initShelterMap();
     initContactForm();
+    initResponsiveNavigation();
 });

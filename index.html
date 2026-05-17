@@ -3,23 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetFinder - Pomagamy zwierzętom znaleźć dom</title>
+    <title>PetFinder - Pomagamy zwierzД™tom znaleЕєД‡ dom</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <a href="#main-content" class="skip-link">Przejdź do treści głównej</a>
+    <a href="#main-content" class="skip-link">PrzejdЕє do treЕ›ci gЕ‚Гіwnej</a>
 
-    <header>
+    <header class="site-header">
         <div class="container">
             <div class="logo">Pet<span>Finder</span></div>
-            <nav aria-label="Menu główne">
-                <ul>
+            <button class="nav-toggle" type="button" aria-controls="site-menu" aria-expanded="false">
+                <span class="sr-only">Toggle menu</span>
+                <span class="bars" aria-hidden="true">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </span>
+            </button>
+            <nav class="main-nav" aria-label="Menu gЕ‚Гіwne">
+                <ul id="site-menu" class="menu">
                     <li><a href="index.html" aria-current="page">Start</a></li>
                     <li><a href="map.html">Mapa schronisk</a></li>
                     <li><a href="pets.html">Podopieczni</a></li>
-                    <li><a href="video.html">Wideo</a></li>
-                    <li><a href="contact.html">Kontakt</a></li>
+                    <li class="dropdown">
+                        <button class="dropdown-toggle" type="button" aria-expanded="false" aria-controls="submenu-more">Wiecej</button>
+                        <ul class="submenu" id="submenu-more">
+                            <li><a href="video.html">Wideo</a></li>
+                            <li><a href="contact.html">Kontakt</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
             <div class="a11y-controls" aria-label="Accessibility settings">
@@ -34,9 +47,9 @@
     <main id="main-content">
         <section class="hero">
             <div class="container">
-                <h1>Każde zwierzę zasługuje na kochający dom</h1>
-                <p>PetFinder łączy wolontariuszy, schroniska i osoby o wielkich sercach.</p>
-                <a href="map.html" class="btn">Znajdź najbliższe schronisko</a>
+                <h1>KaЕјde zwierzД™ zasЕ‚uguje na kochajД…cy dom</h1>
+                <p>PetFinder Е‚Д…czy wolontariuszy, schroniska i osoby o wielkich sercach.</p>
+                <a href="map.html" class="btn">ZnajdЕє najbliЕјsze schronisko</a>
             </div>
         </section>
 
@@ -46,15 +59,15 @@
                 <div class="mission-grid">
                     <div class="mission-item">
                         <h3>Wyszukiwanie</h3>
-                        <p>Ułatwiamy znalezienie schronisk w Twojej okolicy dzięki interaktywnej mapie.</p>
+                        <p>UЕ‚atwiamy znalezienie schronisk w Twojej okolicy dziД™ki interaktywnej mapie.</p>
                     </div>
                     <div class="mission-item">
                         <h3>Adopcja</h3>
-                        <p>Prezentujemy profile zwierząt, które czekają na nowy, bezpieczny dom.</p>
+                        <p>Prezentujemy profile zwierzД…t, ktГіre czekajД… na nowy, bezpieczny dom.</p>
                     </div>
                     <div class="mission-item">
                         <h3>Wsparcie</h3>
-                        <p>Budujemy sieć wolontariuszy gotowych nieść pomoc każdego dnia.</p>
+                        <p>Budujemy sieД‡ wolontariuszy gotowych nieЕ›Д‡ pomoc kaЕјdego dnia.</p>
                     </div>
                 </div>
             </div>
@@ -63,7 +76,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 PetFinder - Projekt edukacyjny. Zgodność z WCAG 2.2.</p>
+            <p>&copy; 2024 PetFinder - Projekt edukacyjny. ZgodnoЕ›Д‡ z WCAG 2.2.</p>
         </div>
     </footer>
 
